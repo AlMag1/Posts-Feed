@@ -1,11 +1,12 @@
 import { createAppSlice } from "@/lib/createAppSlice";
 import { Post, User } from "@/types";
 import { createAsyncThunk } from "@reduxjs/toolkit";
-import { fetchPosts } from "./postsAPI";
-import { fetchUsers } from "../users/usersAPI";
+import { fetchPost, fetchPosts } from "./postsAPI";
+import { fetchUser, fetchUsers } from "../users/usersAPI";
 
 export interface PostsSliceState {
   posts: Post[];
+  selectedPost: Post | null;
   start: number;
   end: number;
   hasMoreResults: boolean;
@@ -13,6 +14,7 @@ export interface PostsSliceState {
 
 const initialState: PostsSliceState = {
   posts: [],
+  selectedPost: null,
   start: 0,
   end: 20,
   hasMoreResults: true,
@@ -33,6 +35,21 @@ export const getPosts = createAsyncThunk(
   }
 );
 
+export const getPost = createAsyncThunk(
+  "posts/getPost",
+  async (data: { postId: number }) => {
+    const apiPost = await fetchPost({ id: data.postId });
+    const author = await fetchUser({ id: apiPost.userId });
+
+    const post: Post = {
+      ...apiPost,
+      author,
+    };
+
+    return post;
+  }
+);
+
 export const postsSlice = createAppSlice({
   name: "posts",
   initialState,
@@ -42,6 +59,7 @@ export const postsSlice = createAppSlice({
     selectStart: (posts) => posts.start,
     selectEnd: (posts) => posts.end,
     selectHasMoreResults: (posts) => posts.hasMoreResults,
+    selectPost: (posts) => posts.selectedPost,
   },
   extraReducers: (builder) => {
     builder.addCase(getPosts.fulfilled, (state, action) => {
@@ -50,8 +68,16 @@ export const postsSlice = createAppSlice({
       state.end += 20;
       state.hasMoreResults = !!action.payload.length;
     });
+    builder.addCase(getPost.fulfilled, (state, action) => {
+      state.selectedPost = action.payload;
+    });
   },
 });
 
-export const { selectPosts, selectStart, selectEnd, selectHasMoreResults } =
-  postsSlice.selectors;
+export const {
+  selectPosts,
+  selectStart,
+  selectEnd,
+  selectHasMoreResults,
+  selectPost,
+} = postsSlice.selectors;

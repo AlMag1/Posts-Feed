@@ -14,3 +14,11 @@ export const fetchPosts = async ({
 
   return response.data;
 };
+
+export const fetchPost = async ({ id }: { id: number }) => {
+  const response: AxiosResponse<PostDTO> = await axios.get(
+    `https://jsonplaceholder.typicode.com/posts/${id}`
+  );
+
+  return response.data;
+};
