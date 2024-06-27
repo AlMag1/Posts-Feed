@@ -9,7 +9,7 @@ export const fetchPosts = async ({
   end: number;
 }) => {
   const response: AxiosResponse<PostDTO[]> = await axios.get(
-    `https://jsonplaceholder.typicode.com/posts?_start=${start}&_end=${end}`
+    `https://jsonplaceholder.typicode.com/posts?_start=${start}&_end=${end}`,
   );
 
   return response.data;
@@ -17,7 +17,7 @@ export const fetchPosts = async ({
 
 export const fetchPost = async ({ id }: { id: number }) => {
   const response: AxiosResponse<PostDTO> = await axios.get(
-    `https://jsonplaceholder.typicode.com/posts/${id}`
+    `https://jsonplaceholder.typicode.com/posts/${id}`,
   );
 
   return response.data;

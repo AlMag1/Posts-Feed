@@ -36,7 +36,7 @@ export const getPosts = createAsyncThunk(
     }));
 
     return posts;
-  }
+  },
 );
 
 export const getPost = createAsyncThunk(
@@ -51,7 +51,7 @@ export const getPost = createAsyncThunk(
     };
 
     return post;
-  }
+  },
 );
 
 export const postsSlice = createAppSlice({
