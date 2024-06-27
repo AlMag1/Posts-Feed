@@ -6,9 +6,10 @@ export type RootState = ReturnType<typeof rootReducer>;
 
 const rootReducer = combineSlices(postsSlice);
 
-export const makeStore = () => {
+export const makeStore = (preloadedState?: Partial<RootState>) => {
   return configureStore({
     reducer: rootReducer,
+    preloadedState,
   });
 };
 
