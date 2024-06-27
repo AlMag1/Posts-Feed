@@ -1,5 +1,5 @@
-import { User } from "@/types";
-import { UsersDTO } from "@/types/api/user.type";
+import { User } from "@src/types";
+import { UsersDTO } from "@src/types/api/user.type";
 import axios, { AxiosResponse } from "axios";
 
 export const fetchUsers = async ({ limit }: { limit: number }) => {

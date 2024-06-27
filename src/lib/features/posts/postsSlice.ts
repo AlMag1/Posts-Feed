@@ -1,5 +1,5 @@
-import { createAppSlice } from "@/lib/createAppSlice";
-import { Post, User } from "@/types";
+import { createAppSlice } from "@src/lib/createAppSlice";
+import { Post } from "@src/types";
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import { fetchPost, fetchPosts } from "./postsAPI";
 import { fetchUser, fetchUsers } from "../users/usersAPI";

@@ -1,4 +1,4 @@
-import { Post as PostType } from "@/types";
+import { Post as PostType } from "@src/types";
 import Image from "next/image";
 import Link from "next/link";
 import { memo } from "react";

@@ -5,18 +5,19 @@ import {
   selectPost,
   selectPostStatusError,
   selectPostStatusIsLoading,
-} from "@/lib/features/posts/postsSlice";
-import { useAppDispatch, useAppSelector } from "@/lib/hooks";
+} from "@src/lib/features/posts/postsSlice";
+import { useAppDispatch, useAppSelector } from "@src/lib/hooks";
 import Image from "next/image";
 import Link from "next/link";
 import { useEffect } from "react";
 
-export default function Page({ params }: { params: { id: number } }) {
+export default function PostPage({ params }: { params: { id: number } }) {
   const dispatch = useAppDispatch();
   const selectedPost = useAppSelector(selectPost);
   const postStatusIsLoading = useAppSelector(selectPostStatusIsLoading);
   const postError = useAppSelector(selectPostStatusError);
   const { author, body } = selectedPost || {};
+
   useEffect(() => {
     dispatch(getPost({ postId: params.id }));
   }, [dispatch, params.id]);

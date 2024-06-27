@@ -1,11 +1,11 @@
 "use client";
 
-import { getPosts, selectPosts } from "@/lib/features/posts/postsSlice";
-import { useAppDispatch, useAppSelector } from "@/lib/hooks";
+import { getPosts, selectPosts } from "@src/lib/features/posts/postsSlice";
+import { useAppDispatch, useAppSelector } from "@src/lib/hooks";
 import { useEffect } from "react";
 import dynamic from "next/dynamic";
 
-const PostsList = dynamic(() => import("@/components/PostsList"), {
+const PostsList = dynamic(() => import("@src/components/PostsList"), {
   ssr: false,
 });
 

@@ -1,6 +1,6 @@
 "use client";
 import PostItem from "./PostItem";
-import { useAppDispatch, useAppSelector } from "@/lib/hooks";
+import { useAppDispatch, useAppSelector } from "@src/lib/hooks";
 import {
   getPosts,
   selectEnd,
@@ -9,7 +9,7 @@ import {
   selectPostStatusIsLoading,
   selectPosts,
   selectStart,
-} from "@/lib/features/posts/postsSlice";
+} from "@src/lib/features/posts/postsSlice";
 import { memo, useCallback, useEffect, useState } from "react";
 import { useInView } from "react-intersection-observer";
 

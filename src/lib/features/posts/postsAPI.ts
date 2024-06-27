@@ -1,4 +1,4 @@
-import { PostDTO } from "@/types/api";
+import { PostDTO } from "@src/types/api";
 import axios, { AxiosResponse } from "axios";
 
 export const fetchPosts = async ({
