@@ -10,6 +10,8 @@ export interface PostsSliceState {
   start: number;
   end: number;
   hasMoreResults: boolean;
+  loading: boolean;
+  error: string | null;
 }
 
 const initialState: PostsSliceState = {
@@ -18,6 +20,8 @@ const initialState: PostsSliceState = {
   start: 0,
   end: 20,
   hasMoreResults: true,
+  loading: false,
+  error: null,
 };
 
 export const getPosts = createAsyncThunk(
@@ -60,17 +64,38 @@ export const postsSlice = createAppSlice({
     selectEnd: (posts) => posts.end,
     selectHasMoreResults: (posts) => posts.hasMoreResults,
     selectPost: (posts) => posts.selectedPost,
+    selectPostStatusIsLoading: (posts) => posts.loading,
+    selectPostStatusError: (posts) => posts.error,
   },
   extraReducers: (builder) => {
-    builder.addCase(getPosts.fulfilled, (state, action) => {
-      state.posts = [...state.posts, ...action.payload];
-      state.start += 20;
-      state.end += 20;
-      state.hasMoreResults = !!action.payload.length;
-    });
-    builder.addCase(getPost.fulfilled, (state, action) => {
-      state.selectedPost = action.payload;
-    });
+    builder
+      .addCase(getPosts.pending, (state) => {
+        state.loading = true;
+        state.error = null;
+      })
+      .addCase(getPosts.fulfilled, (state, action) => {
+        state.posts = [...state.posts, ...action.payload];
+        state.start += 20;
+        state.end += 20;
+        state.hasMoreResults = !!action.payload.length;
+        state.loading = false;
+      })
+      .addCase(getPosts.rejected, (state, action) => {
+        state.loading = false;
+        state.error = action.error.message || "Failed to fetch posts";
+      })
+      .addCase(getPost.pending, (state) => {
+        state.loading = true;
+        state.error = null;
+      })
+      .addCase(getPost.fulfilled, (state, action) => {
+        state.selectedPost = action.payload;
+        state.loading = false;
+      })
+      .addCase(getPost.rejected, (state, action) => {
+        state.loading = false;
+        state.error = action.error.message || "Failed to fetch post";
+      });
   },
 });
 
@@ -80,4 +105,6 @@ export const {
   selectEnd,
   selectHasMoreResults,
   selectPost,
+  selectPostStatusIsLoading,
+  selectPostStatusError,
 } = postsSlice.selectors;
