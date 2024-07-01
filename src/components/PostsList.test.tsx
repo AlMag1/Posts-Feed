@@ -16,7 +16,7 @@ export const handlers = [
   http.get("https://dummyjson.com/users", async () => {
     await delay(150);
     return HttpResponse.json([]);
-  }),
+  })
 ];
 
 const server = setupServer(...handlers);
@@ -28,7 +28,7 @@ const postsSliceState: PostsSliceState = {
   loading: false,
   selectedPost: null,
   hasMoreResults: false,
-  posts: [],
+  posts: []
 };
 
 beforeAll(() => server.listen());
@@ -41,8 +41,8 @@ describe("Display a feed of posts", () => {
   it("Should display a loading state", () => {
     renderWithProviders(<PostsList />, {
       preloadedState: {
-        posts: { ...postsSliceState, loading: true },
-      },
+        posts: { ...postsSliceState, loading: true }
+      }
     });
 
     expect(screen.getByText(/Posts are loading/)).toBeDefined();
@@ -53,9 +53,9 @@ describe("Display a feed of posts", () => {
       preloadedState: {
         posts: {
           ...postsSliceState,
-          posts: __MOCK_POSTS__,
-        },
-      },
+          posts: __MOCK_POSTS__
+        }
+      }
     });
 
     const [post] = __MOCK_POSTS__;
@@ -74,9 +74,9 @@ describe("Display a feed of posts", () => {
         posts: {
           ...postsSliceState,
           error: "Request has failed with 404 code",
-          posts: [],
-        },
-      },
+          posts: []
+        }
+      }
     });
 
     expect(screen.getByText(/We're sorry/)).toBeDefined();

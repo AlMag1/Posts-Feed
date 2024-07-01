@@ -1,5 +1,14 @@
 ## Getting Started
 
+Prerequisites:
+
+To run this project you will need node >= 20.
+This project was installed with node version 20.10.0, you can use the same node version with the following command:
+
+```bash
+nvm use
+```
+
 First, install the neccessary dependencies:
 
 ```bash

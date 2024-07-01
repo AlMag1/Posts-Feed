@@ -25,6 +25,6 @@ export function renderWithProviders(
 
   return {
     store,
-    ...render(ui, { wrapper: Wrapper, ...renderOptions }),
+    ...render(ui, { wrapper: Wrapper, ...renderOptions })
   };
 }

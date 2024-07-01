@@ -8,7 +8,7 @@ import {
   selectPostStatusError,
   selectPostStatusIsLoading,
   selectPosts,
-  selectStart,
+  selectStart
 } from "@src/lib/features/posts/postsSlice";
 import { memo, useCallback, useEffect, useState } from "react";
 import { useInView } from "react-intersection-observer";
@@ -46,7 +46,7 @@ const PostsList = () => {
   return posts.length ? (
     <>
       <section className="flex flex-col gap-3">
-        {posts.map((post) => (
+        {posts.map(post => (
           <PostItem key={post.id} post={post} />
         ))}
       </section>

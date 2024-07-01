@@ -16,7 +16,7 @@ export const handlers = [
   http.get("https://dummyjson.com/users", async () => {
     await delay(150);
     return HttpResponse.json([]);
-  }),
+  })
 ];
 
 const server = setupServer(...handlers);
@@ -28,7 +28,7 @@ const postsSliceState: PostsSliceState = {
   loading: false,
   selectedPost: null,
   hasMoreResults: false,
-  posts: [],
+  posts: []
 };
 
 const mockParams = { id: 1 };
@@ -43,8 +43,8 @@ describe("Display the selected post", () => {
   it("Should display a loading state", () => {
     renderWithProviders(<PostPage params={mockParams} />, {
       preloadedState: {
-        posts: { ...postsSliceState, loading: true },
-      },
+        posts: { ...postsSliceState, loading: true }
+      }
     });
 
     expect(screen.getByText(/Loading/i)).toBeDefined();

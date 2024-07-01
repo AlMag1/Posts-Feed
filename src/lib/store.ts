@@ -9,7 +9,7 @@ const rootReducer = combineSlices(postsSlice);
 export const makeStore = (preloadedState?: Partial<RootState>) => {
   return configureStore({
     reducer: rootReducer,
-    preloadedState,
+    preloadedState
   });
 };
 

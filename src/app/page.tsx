@@ -6,7 +6,7 @@ import { useEffect } from "react";
 import dynamic from "next/dynamic";
 
 const PostsList = dynamic(() => import("@src/components/PostsList"), {
-  ssr: false,
+  ssr: false
 });
 
 export default function Home() {

@@ -4,7 +4,7 @@ import {
   getPost,
   selectPost,
   selectPostStatusError,
-  selectPostStatusIsLoading,
+  selectPostStatusIsLoading
 } from "@src/lib/features/posts/postsSlice";
 import { useAppDispatch, useAppSelector } from "@src/lib/hooks";
 import Image from "next/image";

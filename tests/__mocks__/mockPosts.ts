@@ -10,7 +10,7 @@ export const __MOCK_POSTS__: Post[] = [
       firstName: "Kendrick",
       lastName: "Nunn",
       id: 1,
-      image: undefined,
-    },
-  },
+      image: undefined
+    }
+  }
 ];

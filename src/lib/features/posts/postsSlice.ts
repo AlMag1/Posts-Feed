@@ -21,7 +21,7 @@ const initialState: PostsSliceState = {
   end: 20,
   hasMoreResults: true,
   loading: false,
-  error: null,
+  error: null
 };
 
 export const getPosts = createAsyncThunk(
@@ -30,13 +30,13 @@ export const getPosts = createAsyncThunk(
     const apiPosts = await fetchPosts({ start: data.start, end: data.end });
     const authors = await fetchUsers({ limit: data.end });
 
-    const posts: Post[] = apiPosts.map((post) => ({
+    const posts: Post[] = apiPosts.map(post => ({
       ...post,
-      author: authors.find((author) => author.id === post.userId),
+      author: authors.find(author => author.id === post.userId)
     }));
 
     return posts;
-  },
+  }
 );
 
 export const getPost = createAsyncThunk(
@@ -47,11 +47,11 @@ export const getPost = createAsyncThunk(
 
     const post: Post = {
       ...apiPost,
-      author,
+      author
     };
 
     return post;
-  },
+  }
 );
 
 export const postsSlice = createAppSlice({
@@ -59,17 +59,17 @@ export const postsSlice = createAppSlice({
   initialState,
   reducers: () => ({}),
   selectors: {
-    selectPosts: (posts) => posts.posts,
-    selectStart: (posts) => posts.start,
-    selectEnd: (posts) => posts.end,
-    selectHasMoreResults: (posts) => posts.hasMoreResults,
-    selectPost: (posts) => posts.selectedPost,
-    selectPostStatusIsLoading: (posts) => posts.loading,
-    selectPostStatusError: (posts) => posts.error,
+    selectPosts: posts => posts.posts,
+    selectStart: posts => posts.start,
+    selectEnd: posts => posts.end,
+    selectHasMoreResults: posts => posts.hasMoreResults,
+    selectPost: posts => posts.selectedPost,
+    selectPostStatusIsLoading: posts => posts.loading,
+    selectPostStatusError: posts => posts.error
   },
-  extraReducers: (builder) => {
+  extraReducers: builder => {
     builder
-      .addCase(getPosts.pending, (state) => {
+      .addCase(getPosts.pending, state => {
         state.loading = true;
         state.error = null;
       })
@@ -84,7 +84,7 @@ export const postsSlice = createAppSlice({
         state.loading = false;
         state.error = action.error.message || "Failed to fetch posts";
       })
-      .addCase(getPost.pending, (state) => {
+      .addCase(getPost.pending, state => {
         state.loading = true;
         state.error = null;
       })
@@ -96,7 +96,7 @@ export const postsSlice = createAppSlice({
         state.loading = false;
         state.error = action.error.message || "Failed to fetch post";
       });
-  },
+  }
 });
 
 export const {
@@ -106,5 +106,5 @@ export const {
   selectHasMoreResults,
   selectPost,
   selectPostStatusIsLoading,
-  selectPostStatusError,
+  selectPostStatusError
 } = postsSlice.selectors;

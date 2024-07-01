@@ -1,5 +1,5 @@
 export default function PostLayout({
-  children,
+  children
 }: Readonly<{
   children: React.ReactNode;
 }>) {
