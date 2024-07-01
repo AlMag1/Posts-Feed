@@ -1,4 +1,3 @@
-// This file serves as a central hub for re-exporting pre-typed Redux hooks.
 import { useDispatch, useSelector, useStore } from "react-redux";
 import type { AppDispatch, AppStore, RootState } from "./store";
 
