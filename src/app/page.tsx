@@ -9,6 +9,8 @@ const PostsList = dynamic(() => import("@src/components/PostsList"), {
   ssr: false
 });
 
+console.log('Test commit');
+
 export default function Home() {
   const dispatch = useAppDispatch();
   const posts = useAppSelector(selectPosts);
